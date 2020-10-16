@@ -10,17 +10,37 @@
 
 <body>
     <header class="">
-        Weather Dashboard
+        <h1>
+            Weather Dashboardname
+        </h1>
     </header>
     <aside>
-        <!-- Search bar, dynamic city link list (limited) -->
+        <div id="search-bar-element">
+            <!-- Search bar -->
+            <div class="input-group mb-3">
+                <h2 class="">Search for a city:</h2>
+                <input type="text" name="" id="city-input" class="form-control">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="search-button">
+                        Submit
+                    </button>
+                </div>
+            </div>
+    
+            <div id="city-button-element">
+                <!-- City buttons rendered here -->
+                <!-- dynamic city link list (limited)  -->
+            </div>
+        </div>
     </aside>
     <main>
         <section>
             <!-- City, temp, humidity, wind speed, UV index, weather icon -->
+            <div id="current-weather-element"></div>
         </section>
         <section>
             <!-- Five day forecast -->
+            <div id="five-day-weather-element"></div>
         </section>
     </main>
     <footer></footer>
