@@ -1,0 +1,5 @@
+/* Override Materialize defaults */
+
+.card .card-content {
+    padding: 10px;
+};

@@ -4,52 +4,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style src="./style.css"></style>
+    <!-- Compiled and minified CSS for Materialize-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./style.css"></link>
     <title>Weather Dashboard</title>
 </head>
 
 <body>
     <header class="">
-        <h1>
-            Weather Dashboard
-        </h1>
+        <nav>
+            <div class="nav-wrapper blue-grey darken-3">
+              <span class="brand-logo center">Weather Dashboard</span>
+            </div>
+          </nav>
     </header>
-    <aside>
-        <div id="search-bar-element">
-            <!-- Search bar -->
-            <div class="input-group mb-3">
-                <h2 class="">Search for a city:</h2>
-                <input type="text" name="" id="city-input" class="form-control">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="search-button">
-                        Submit
-                    </button>
+    <div class="row">
+        <aside>
+            <div class="col s12 m3" id="search-bar-element">
+                <!-- Search bar -->
+                <div class="input-group">
+                    <h3 class="">Search for a city:</h3>
+                    <input type="text" name="" id="city-input" class="form-control">
+                    <div class="input-group-append">
+                        <button class="btn" type="button" id="search-button">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+
+                <div id="city-button-element">
+                    <!-- City buttons rendered here -->
+                    <!-- dynamic city link list (limited)  -->
                 </div>
             </div>
-    
-            <div id="city-button-element">
-                <!-- City buttons rendered here -->
-                <!-- dynamic city link list (limited)  -->
+        </aside>
+        <main>
+            <div class="row">
+                <section>
+                    <!-- City, temp, humidity, wind speed, UV index, weather icon -->
+                    <div class="col s12 m9" id="current-weather-element"></div>
+                </section>
+                <section>
+                    <div class="row">
+                        <!-- Five day forecast -->
+                        <div class="col s12 m9">
+                            <div class="row" id="five-day-weather-element"></div>
+                        </div>
+                        <!-- 5 day forecast cards rendered dynamically -->
+                    </div>
+                </section>
             </div>
-        </div>
-    </aside>
-    <main>
-        <section>
-            <!-- City, temp, humidity, wind speed, UV index, weather icon -->
-            <div class="" id="current-weather-element" style="background-color: yellow;">
-            ppp
-            </div>
-        </section>
-        <section>
-            <!-- Five day forecast -->
-            <div id="five-day-weather-element"></div>
-            <!-- 5 day forecast cards rendered dynamically -->
-        </section>
-    </main>
+        </main>
+    </div>
     <footer></footer>
 
-
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Materialize-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
     <script src="./script.js"></script>
 </body>
 
