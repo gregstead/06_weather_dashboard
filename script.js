@@ -2,10 +2,15 @@
 // Global variables
 var $currentWeatherEl = $('#current-weather-element');
 var $fiveDayWeatherEl = $('#five-day-weather-element');
+var $cityButtonEl = $('#city-button-element');
 var cityName;
 var cityArr;
-var response;
 
+if (localStorage.getItem('recent_searches')) {
+    cityArr = JSON.parse(localStorage.getItem('recent_searches'))
+} else {
+    cityArr = [];
+}
 
 // Click handler
 $(document).on('click', function (event) {
@@ -15,13 +20,20 @@ $(document).on('click', function (event) {
     if (event.target.matches('#search-button')) {
         // Query params
         // Get city name from text area
-        // TODO: Authenticate city input
-        var $cityInput = 'q=' + checkedCity($('#city-input').val());
+        var cityInput = checkedCity($('#city-input').val());
+        // make a button
+        var $cityButton = $('<button>');
+        $cityButton.text(cityInput);
+        // prepend to cityArr
+        cityArr.unshift(cityInput);
+        renderCityArr();
+
+        var cityQuery = 'q=' + cityInput;
         var API_Key = '&appid=' + 'f4330d7ea944cf18c17c360fd45ea7dd';
         var units = '&units=imperial'
         // Get current weather JSON for city from openweathermap 5 day forecast API
 
-        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?" + $cityInput + API_Key + units;
+        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?" + cityQuery + API_Key + units;
 
         // make ajax API call
         $.ajax({
@@ -61,7 +73,7 @@ function renderCurrentWeather(response) {
     // TODO get date and icon
     
     $currentWeatherEl.append("<p>" + 'Temperature: ' + response.list[0].main.temp + "</p>");
-    $currentWeatherEl.append("<p>" + 'Humidity: ' + response.list[0].main.humidity + "</p>");
+    $currentWeatherEl.append("<p>" + 'Humidity: ' + response.list[0].main.humidity + ' %' + "</p>");
     $currentWeatherEl.append("<p>" + 'Wind speed: ' + response.list[0].wind.speed + "</p>");
 };
 
@@ -70,11 +82,12 @@ function renderCurrentWeather(response) {
 function renderFiveDayForecase(response){
     // Empty div
     $fiveDayWeatherEl.empty();
-
+    // Response is in 3-hour increments, so 24/3 = 8, 8* (5 days) = 40
+    // reponse[0] is current day's weather, so i=1
     for (i = 1; i < 40; i += 8) {
         
         // Make DOM node for card
-
+        // TO DO - check response for icons
         $forecastCardContainer = $('<div>');
         $forecastCardContainer.attr('class','col s6 m3 l2')
 
@@ -89,7 +102,7 @@ function renderFiveDayForecase(response){
         $forecastCardContent.attr('class','card-content white-text')
 
         $forecastCardContent.append("<p>" + 'Temp: ' + response.list[i+1].main.temp + "</p>");
-        $forecastCardContent.append("<p>" + 'Humidity: ' + response.list[i+1].main.humidity + "</p>");
+        $forecastCardContent.append("<p>" + 'Humidity: ' + response.list[i+1].main.humidity + ' %' + "</p>");
 
         $forecastCard.append($forecastCardTitle);
         $forecastCard.append($forecastCardContent);
@@ -102,7 +115,15 @@ function renderFiveDayForecase(response){
     };
 };
 
-// Unix timestamp => Formatted date string
-function unixToDate(timestamp) {
-    console.log('nothing');
-}
+function renderCityArr () {
+    // Clear div
+    $cityButtonEl.empty();
+
+    // Loop through cityArray
+    for (var i = 0; i < cityArr.length; i++) {
+        var $cityButton = $('<button>');
+        $cityButton.text(cityArr[i]);
+        $cityButton.attr('class','btn');
+        $cityButtonEl.append($cityButton);
+    };
+};
