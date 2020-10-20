@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <!-- Header -->
     <header class="">
         <nav>
             <div class="nav-wrapper blue-grey darken-3">
@@ -18,11 +19,13 @@
             </div>
           </nav>
     </header>
+    <!-- All body elements -->
     <div class="row">
+        <!-- Search section -->
         <aside>
             <div class="col s12 m3" id="search-bar-element">
                 <!-- Search bar -->
-                <div class="input-group">
+                <div>
                     <h4 class="">Search for a city:</h4>
                     <input type="text" name="" id="city-input" class="form-control">
                     <div class="input-group-append">
@@ -34,23 +37,24 @@
 
                 <div id="city-button-element">
                     <!-- City buttons rendered here -->
-                    <!-- dynamic city link list (limited)  -->
                 </div>
             </div>
         </aside>
         <main>
             <div class="row">
                 <section>
-                    <!-- City, temp, humidity, wind speed, UV index, weather icon -->
-                    <div class="col s12 m9" id="current-weather-element"></div>
+                    <div class="col s12 m9" id="current-weather-element">
+                        <!-- Current weather rendered here -->
+                    </div>
                 </section>
                 <section>
                     <div class="row">
                         <!-- Five day forecast -->
                         <div class="col s12 m9">
-                            <div class="row" id="five-day-weather-element"></div>
+                            <div class="row" id="five-day-weather-element">
+                                <!-- 5 day forecast cards rendered here -->
+                            </div>
                         </div>
-                        <!-- 5 day forecast cards rendered dynamically -->
                     </div>
                 </section>
             </div>
