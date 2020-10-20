@@ -104,8 +104,9 @@ function renderFiveDayForecase(response) {
     $fiveDayWeatherEl.empty();
     // Response is in 3-hour increments, so 24/3 = 8, 8* (5 days) = 40
     // reponse[0] is current day's weather, so i=1
-    for (i = 1; i < 40; i += 8) {
+    for (i = 7; i < 41; i += 8) {
 
+        console.log(i);
         // Make DOM node for card
         // TO DO - check response for icons
         $forecastCardContainer = $('<div>');
@@ -120,8 +121,8 @@ function renderFiveDayForecase(response) {
         $forecastCardTitle.attr('class', 'white-text left-align').text(fDate);
         // Card content
         $forecastCardContent = $('<div>');
-        $forecastCardContent.attr('class', 'card-content white-text');
-        $forecastCardContent.attr('style','font-size: 11px;');
+        $forecastCardContent.attr('class', 'card-content white-text my-card');
+        // $forecastCardContent.attr('style','font-size: 11px;');
 
         $forecastCardContent.append('<img src="' + getOpenWeatherIconURL(response, i) + '" style="width:40px; height=40px;" />');
         $forecastCardContent.append("<p>" + 'Temp: ' + response.list[i].main.temp + "</p>");

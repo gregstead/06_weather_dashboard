@@ -2,19 +2,23 @@
 
 .card .card-content {
     padding: 10px;
-};
+}
 
-.city-button {
+.my-card {
+    font-size: 10px;
+}
+
+#city-button-element {
     margin-top: 10px;
-};
+}
 
 @media screen and (max-width: 503px) {
-    .nav-wrapper {
+    nav .nav-wrapper {
         height: 120px;
-    };
+    }
 
     main {
         margin-top: 50px;
-    };
+    }
 
-};
+}
