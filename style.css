@@ -4,6 +4,10 @@
     padding: 10px;
 };
 
+.city-button {
+    margin-top: 10px;
+};
+
 @media screen and (max-width: 503px) {
     .nav-wrapper {
         height: 120px;

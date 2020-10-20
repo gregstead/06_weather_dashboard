@@ -6,6 +6,9 @@ var $cityButtonEl = $('#city-button-element');
 var cityName;
 var cityArr;
 
+// Global variable to test response object
+var testResponse;
+
 if (localStorage.getItem('recent_searches')) {
     cityArr = JSON.parse(localStorage.getItem('recent_searches'))
 } else {
@@ -21,17 +24,20 @@ $(document).on('click', function (event) {
         // Query params
         // Get city name from text area
         var cityInput = checkedCity($('#city-input').val());
-        // make a button
-        var $cityButton = $('<button>');
-        $cityButton.text(cityInput);
         // prepend to cityArr
         cityArr.unshift(cityInput);
-        renderCityArr();
+        // Query API and render results
         queryOpenWeather(cityInput);
 
-    // City button handler
-    } else if (event.target.matches('#city-button')) {
-        console.log(event);
+        // City button handler
+    } else if (event.target.matches('.city-button')) {
+        // Query params
+        // Get city name from button
+        var cityInput = $(event.target).val();
+        //console.log(event.target);
+
+        // Query API and render results
+        queryOpenWeather(cityInput);
     }
 })
 
@@ -51,12 +57,14 @@ function queryOpenWeather(cityInput) {
         url: queryURL,
         method: "GET",
     }).then(function (res) {
+        testResponse = res;
 
-        // response = res;
         // Render page elements from response
         renderCurrentWeather(res);
         // Render 5 day forecast 
         renderFiveDayForecase(res);
+        // Render city buttons
+        renderCityArr();
     })
 }
 
@@ -74,14 +82,20 @@ function renderCurrentWeather(response) {
     // Empty div
     $currentWeatherEl.empty();
 
+    // Render formatted date with Moment.js
     var fDate = moment(response.list[0].dt_txt).format(' (MM/DD/YYYY)');
-    $currentWeatherEl.append("<h5>" + response.city.name + fDate + "</h5>");
-    // TODO get date and icon
-
+    $currentWeatherEl.append("<h5>" + response.city.name + fDate + "</h5>")
+    $currentWeatherEl.append('<img src="' + getOpenWeatherIconURL(response, 0) + '" />');
     $currentWeatherEl.append("<p>" + 'Temperature: ' + response.list[0].main.temp + "</p>");
     $currentWeatherEl.append("<p>" + 'Humidity: ' + response.list[0].main.humidity + ' %' + "</p>");
     $currentWeatherEl.append("<p>" + 'Wind speed: ' + response.list[0].wind.speed + "</p>");
 };
+
+// Object => String
+// Takes an OpenWeather API response and returns a URL for the icon
+function getOpenWeatherIconURL(response, index) {
+    return "http://openweathermap.org/img/wn/" + response.list[index].weather[0].icon + "@2x.png";
+}
 
 // JSON => HTML
 // Takes JSON response from openweather and renders five day weather HTML
@@ -99,16 +113,19 @@ function renderFiveDayForecase(response) {
 
         $forecastCard = $('<div>');
         $forecastCard.attr('class', 'card blue-grey hoverable');
+        $forecastCard.attr('style','width: max-content;')
         //  Card title - Date MM/DD/YYYY
         $forecastCardTitle = $('<h7>');
         var fDate = moment(response.list[i].dt_txt).format('MM/DD/YYYY');
         $forecastCardTitle.attr('class', 'white-text left-align').text(fDate);
         // Card content
         $forecastCardContent = $('<div>');
-        $forecastCardContent.attr('class', 'card-content white-text')
+        $forecastCardContent.attr('class', 'card-content white-text');
+        $forecastCardContent.attr('style','font-size: 11px;');
 
-        $forecastCardContent.append("<p>" + 'Temp: ' + response.list[i + 1].main.temp + "</p>");
-        $forecastCardContent.append("<p>" + 'Humidity: ' + response.list[i + 1].main.humidity + ' %' + "</p>");
+        $forecastCardContent.append('<img src="' + getOpenWeatherIconURL(response, i) + '" style="width:40px; height=40px;" />');
+        $forecastCardContent.append("<p>" + 'Temp: ' + response.list[i].main.temp + "</p>");
+        $forecastCardContent.append("<p>" + 'Humidity: ' + response.list[i].main.humidity + ' %' + "</p>");
 
         $forecastCard.append($forecastCardTitle);
         $forecastCard.append($forecastCardContent);
@@ -125,11 +142,12 @@ function renderCityArr() {
     // Clear div
     $cityButtonEl.empty();
 
-    // Loop through cityArray
+    // Loop through cityArray and create city buttons
     for (var i = 0; i < cityArr.length; i++) {
         var $cityButton = $('<button>');
         $cityButton.text(cityArr[i]);
-        $cityButton.attr('class', 'btn');
-        $cityButtonEl.append($cityButton);
+        $cityButton.attr('class', 'btn city-button');
+        $cityButton.attr('value',cityArr[i]);
+        $cityButtonEl.append($cityButton).append('<br>');
     };
 };
