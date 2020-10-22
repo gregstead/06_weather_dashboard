@@ -95,7 +95,22 @@ function renderCurrentWeather(response) {
 // JSON => HTML
 // Takes UV index response and renders it
 function renderUVIndex(response) {
-    var UV_Index = response.value;
+    var uvValue = response.value;
+    var uvClass = '';
+    // uvClass to colorize UV index
+    if (uvValue <= 2) {
+        uvClass = 'green lighten-5';
+    } else if (uvValue > 2 && uvValue <= 5) {
+        uvClass = 'yellow lighten-5';
+    } else if (uvValue > 5 && uvValue <= 7) {
+        uvClass = 'orange lighten-5';
+    } else if (uvValue > 7 && uvValue <= 10) {
+        uvClass = 'red lighten-5';
+    } else if (uvValue) {
+        uvClass = 'deep-purple lighten-5';
+    };
+
+    var UV_Index = '<span class=' + uvClass + '>' + uvValue + '</span>';
 
     $currentWeatherEl.append('<p>' + 'UV Index: ' + UV_Index + '</p>');
 }
