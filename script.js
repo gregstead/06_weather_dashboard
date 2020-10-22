@@ -61,7 +61,7 @@ function queryOpenWeather(cityInput) {
         // Render 5 day forecast 
         renderFiveDayForecase(res);
         // Prepend city name to city array
-        cityArr.unshift(cityInput);
+        updateCityArr(cityInput);
         // Render city buttons
         renderCityArr();
     })
@@ -180,4 +180,11 @@ function renderCityArr() {
     };
 
     localStorage.setItem('recent_searches', JSON.stringify(cityArr));
+};
+
+function updateCityArr(city) {
+    // If city not in cityArr, prepend city
+    if (!cityArr.includes(city)) {
+        cityArr.unshift(city);
+    };
 };
