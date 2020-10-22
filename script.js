@@ -137,7 +137,7 @@ function renderFiveDayForecase(response) {
         // Make DOM node for card
         // TO DO - check response for icons
         $forecastCardContainer = $('<div>');
-        $forecastCardContainer.attr('class', 'col s6 m3 l2')
+        $forecastCardContainer.attr('class', 'col s4 m2');
 
         $forecastCard = $('<div>');
         $forecastCard.attr('class', 'card blue-grey hoverable');
@@ -167,6 +167,8 @@ function renderFiveDayForecase(response) {
 };
 
 function renderCityArr() {
+    //Show title
+    $('#city-button-heading').attr('class','');
     // Clear div
     $cityButtonEl.empty();
 
