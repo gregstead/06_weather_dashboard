@@ -78,6 +78,8 @@ function checkedCity(cityNameString) {
 // JSON => HTML
 // Takes JSON response from openweather and renders current weather HTML
 function renderCurrentWeather(response) {
+    //Show title
+    $('#current-weather-heading').attr('class','');
     // Empty div
     $currentWeatherEl.empty();
 
@@ -128,6 +130,8 @@ function getOpenWeatherIconURL(response, index) {
 // JSON => HTML
 // Takes JSON response from openweather and renders five day weather HTML
 function renderFiveDayForecase(response) {
+    //Show title
+    $('#five-day-heading').attr('class','');
     // Empty div
     $fiveDayWeatherEl.empty();
     // Response is in 3-hour increments, so 24/3 = 8, 8* (5 days) = 40
