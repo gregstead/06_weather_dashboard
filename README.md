@@ -9,6 +9,8 @@
 
 ## General info
 
+A simple weather dashboard. Type the name of a city in the search bar and click "submit". The app will render the current forecast, the current UV index, and a forecast for the next 5 days. Your recent searches will appear as buttons below the search bar.
+
 This project was created as the sixth homework assignment for the part-time coding bootcamp at the University of Kansas.
 
 ## Screenshots
@@ -24,9 +26,11 @@ Project is created with:
 * HTML
 * CSS
 * JavaScript
-  * Bootstrap
   * jQuery
   * Moment.js
+* Materialize by Google
+* OpenWeather 5 day / 3 hour weather forecast
+* OpenWeather UV Index
 
 ## Setup
 
