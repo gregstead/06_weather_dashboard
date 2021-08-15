@@ -93,23 +93,29 @@ function renderCurrentWeather(response) {
       fDate +
       "</3>"
   );
+
+  let $currentWeatherDetails = $("<div>");
+  $currentWeatherDetails.attr("class", "current-weather-details");
+
   $currentWeatherEl.append(
     '<img src="' + getOpenWeatherIconURL(response, 0) + '" />'
   );
-  $currentWeatherEl.append(
+
+  $currentWeatherEl.append($currentWeatherDetails);
+  $currentWeatherDetails.append(
     '<p class="temperature">' +
       "Temperature: " +
       Math.floor(response.list[0].main.temp) +
       " °F </p>"
   );
-  $currentWeatherEl.append(
+  $currentWeatherDetails.append(
     '<p class="humidity">' +
       "Humidity: " +
       response.list[0].main.humidity +
       " %" +
       "</p>"
   );
-  $currentWeatherEl.append(
+  $currentWeatherDetails.append(
     '<p class="wind-speed">' +
       "Wind speed: " +
       response.list[0].wind.speed +
@@ -120,6 +126,7 @@ function renderCurrentWeather(response) {
 // JSON => HTML
 // Takes UV index response and renders it
 function renderUVIndex(response) {
+  var $currentWeatherDetails = $(".current-weather-details");
   var uvValue = response.value;
   var uvClass = "";
   // uvClass to colorize UV index
@@ -137,7 +144,7 @@ function renderUVIndex(response) {
 
   var UV_Index = "<span class=" + uvClass + ">" + uvValue + "</span>";
 
-  $currentWeatherEl.append(
+  $currentWeatherDetails.append(
     '<p class="uv-index">' + "UV Index: " + UV_Index + "</p>"
   );
 }
