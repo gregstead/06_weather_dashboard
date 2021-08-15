@@ -3,7 +3,8 @@
 :root {
   --clr-white: #fbfcfe;
   --clr-neutral: #efefef;
-  --clr-grey-400: rgb(77, 75, 75);
+  --clr-grey-100: hsl(0, 1.3%, 89.8%);
+  --clr-grey-400: hsl(0, 1.3%, 29.8%);
   --clr-watermelon: #ff3b3f;
   --clr-sky: hsl(190.5, 60.6%, 87.1%);
   --clr-sky-white: hsl(190.5, 60.6%, 95.1%);
@@ -19,6 +20,7 @@ button {
   color: var(--clr-watermelon);
   text-transform: uppercase;
   font-weight: 600;
+  font-size: 1em;
 }
 
 h1 {
@@ -27,10 +29,28 @@ h1 {
 
 input {
   text-align: center;
+  font-size: 1.5em;
 }
 
 input::placeholder {
   text-align: center;
+  font-size: 1.5em;
+}
+
+.city-name {
+  font-size: 2em;
+}
+
+.city-date {
+  font-size: 1em;
+}
+
+.current-weather-element > p {
+  font-weight: 500;
+  font-size: 1em;
+}
+
+.five-day-weather > h3 {
   font-size: 1.5em;
 }
 
@@ -74,7 +94,7 @@ header > h1 {
 }
 
 input {
-  background-color: var(--clr-white);
+  background-color: var(--clr-grey-100);
   border: none;
   outline: none;
 }
@@ -88,6 +108,7 @@ input {
 .current-weather {
   order: 0;
   height: 50vh;
+  width: 100vw;
   background: linear-gradient(
     0.27turn,
     var(--clr-sky),
@@ -97,6 +118,15 @@ input {
   opacity: 0.8;
   border-top: 1px solid #fff;
   border-bottom: 1px solid #fff;
+  border-radius: 4px;
+}
+
+@media screen and (min-width: 588px) {
+  .current-weather {
+    align-self: center;
+    width: 40em;
+    border: 1px solid #fff;
+  }
 }
 
 .current-weather-container {
@@ -124,16 +154,49 @@ input {
   margin-top: 5vh;
 }
 
-.current-weather-element > .temperature,
-.humidity,
-.wind-speed,
-.uv-index {
+.current-weather-element > p {
   padding-top: 1vh;
-  padding-left: 40vw;
+  margin-left: 8.5em;
+}
+
+@media screen and (min-width: 469px) {
+  .current-weather-element > p {
+    padding-top: 1vh;
+    margin-left: 40vw;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .current-weather-element > p {
+    padding-top: 1vh;
+    margin-left: 20em;
+  }
 }
 
 .five-day-weather {
   order: 3;
+  margin-left: 5vw;
+}
+
+.five-day-weather-card {
+  margin: 5vh 5vw;
+  padding: 1em;
+  background: linear-gradient(
+    0.27turn,
+    var(--clr-sky),
+    var(--clr-sky-white),
+    var(--clr-sky)
+  );
+  opacity: 0.8;
+  border: 1px solid #fff;
+  border-radius: 4px;
+}
+
+.five-day-weather-element {
+  margin: 5vh 5vw;
+  display: flex;
+  justify-content: space-between;
+  overflow-x: auto;
 }
 
 .hidden {
@@ -143,6 +206,20 @@ input {
 .main-container {
   display: flex;
   flex-direction: column;
+}
+
+.recent-search-container {
+  margin: 5vh 5vw;
+}
+
+.recent-searches {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.recent-searches > .btn {
+  margin-top: 1em;
 }
 
 .search-bar {
@@ -157,9 +234,54 @@ input {
   height: 30vh;
 }
 
+.uv-green,
+.uv-yellow,
+.uv-orange,
+.uv-red,
+.uv-deep-purple {
+  position: relative;
+}
+
+.uv-green::after,
+.uv-yellow::after,
+.uv-orange::after,
+.uv-red::after,
+.uv-deep-purple::after {
+  position: absolute;
+  bottom: 0.3em;
+  left: 3em;
+  content: "";
+  height: 1em;
+  width: 1em;
+  border-radius: 50%;
+  opacity: 0.8;
+  background-color: transparent;
+}
+
+.uv-green::after {
+  background-color: rgb(34, 189, 34);
+}
+
+.uv-yellow::after {
+  background-color: yellow;
+}
+.uv-orange::after {
+  background-color: orange;
+}
+.uv-red::after {
+  background-color: red;
+  content: "";
+}
+.uv-deep-purple::after {
+  background-color: purple;
+}
+
 .weather-icon {
   position: absolute;
   left: 0;
   margin-left: 5vw;
   z-index: 0;
+}
+
+@media screen and (min-width: 768) {
 }

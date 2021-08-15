@@ -86,7 +86,12 @@ function renderCurrentWeather(response) {
   // Render formatted date with Moment.js
   var fDate = moment(response.list[0].dt_txt).format("MMMM Do YYYY");
   $currentWeatherEl.append(
-    "<h2>" + response.city.name + "</h2>" + "<h3>" + fDate + "</3>"
+    '<h2 class="city-name">' +
+      response.city.name +
+      "</h2>" +
+      '<h3 class="city-date">' +
+      fDate +
+      "</3>"
   );
   $currentWeatherEl.append(
     '<img src="' + getOpenWeatherIconURL(response, 0) + '" />'
@@ -94,8 +99,8 @@ function renderCurrentWeather(response) {
   $currentWeatherEl.append(
     '<p class="temperature">' +
       "Temperature: " +
-      response.list[0].main.temp +
-      "</p>"
+      Math.floor(response.list[0].main.temp) +
+      " °F </p>"
   );
   $currentWeatherEl.append(
     '<p class="humidity">' +
@@ -119,15 +124,15 @@ function renderUVIndex(response) {
   var uvClass = "";
   // uvClass to colorize UV index
   if (uvValue <= 2) {
-    uvClass = "green lighten-5";
+    uvClass = "uv-green";
   } else if (uvValue > 2 && uvValue <= 5) {
-    uvClass = "yellow lighten-5";
+    uvClass = "uv-yellow";
   } else if (uvValue > 5 && uvValue <= 7) {
-    uvClass = "orange lighten-5";
+    uvClass = "uv-orange";
   } else if (uvValue > 7 && uvValue <= 10) {
-    uvClass = "red lighten-5";
+    uvClass = "uv-red";
   } else if (uvValue) {
-    uvClass = "deep-purple lighten-5";
+    uvClass = "uv-deep-purple";
   }
 
   var UV_Index = "<span class=" + uvClass + ">" + uvValue + "</span>";
@@ -185,10 +190,10 @@ function renderFiveDayForecase(response) {
     // Make DOM node for card
     // TO DO - check response for icons
     $forecastCardContainer = $("<div>");
-    $forecastCardContainer.attr("class", "col s4 m2");
+    $forecastCardContainer.attr("class", "forecast-card-container");
 
     $forecastCard = $("<div>");
-    $forecastCard.attr("class", "card blue-grey hoverable");
+    $forecastCard.attr("class", "five-day-weather-card");
     $forecastCard.attr("style", "width: max-content;");
     //  Card title - Date MM/DD/YYYY
     $forecastCardTitle = $("<h7>");
@@ -205,7 +210,7 @@ function renderFiveDayForecase(response) {
         '" style="width:40px; height=40px;" />'
     );
     $forecastCardContent.append(
-      "<p>" + "Temp: " + response.list[i].main.temp + "</p>"
+      "<p>" + "Temp: " + Math.floor(response.list[i].main.temp) + " °F</p>"
     );
     $forecastCardContent.append(
       "<p>" + "Humidity: " + response.list[i].main.humidity + " %" + "</p>"
