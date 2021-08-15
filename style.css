@@ -122,10 +122,28 @@ input {
   outline: none;
 }
 
+.card-content {
+  position: relative;
+}
+
+.card-content > img {
+  position: absolute;
+  scale: 2;
+  margin-left: 2em;
+  bottom: 4em;
+  background-color: var(--clr-sky);
+  border-radius: 50%;
+  z-index: -1;
+}
+
 .city-input {
   margin: 0 0 1.5em 0;
   width: 80vw;
   height: 3em;
+}
+
+img + p {
+  margin-top: 8vh;
 }
 
 .current-weather {
@@ -203,7 +221,7 @@ input {
 }
 
 .recent-search-container {
-  margin: 5vh 5vw;
+  margin: 2em 0 0 2em;
 }
 
 .recent-searches {
@@ -218,6 +236,10 @@ input {
 
 .search-bar {
   order: 1;
+}
+
+.search-button {
+  margin-top: 2em;
 }
 
 .search-container {
@@ -298,6 +320,7 @@ input {
 
   header {
     background-color: #fff;
+    height: 10vh;
   }
 
   .city-input {

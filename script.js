@@ -203,7 +203,7 @@ function renderFiveDayForecase(response) {
     $forecastCard.attr("class", "five-day-weather-card");
     $forecastCard.attr("style", "width: max-content;");
     //  Card title - Date MM/DD/YYYY
-    $forecastCardTitle = $("<h7>");
+    $forecastCardTitle = $("<h6>");
     var fDate = moment(response.list[i].dt_txt).format("MM/DD/YYYY");
     $forecastCardTitle.attr("class", "white-text left-align").text(fDate);
     // Card content
@@ -240,7 +240,7 @@ function renderCityArr() {
   $cityButtonEl.empty();
 
   // Loop through cityArray and create city buttons
-  for (var i = 0; i < cityArr.length; i++) {
+  for (var i = 0; i < 6; i++) {
     var $cityButton = $("<button>");
     $cityButton.text(cityArr[i]);
     $cityButton.attr("class", "btn city-button");
