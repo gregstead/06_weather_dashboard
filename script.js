@@ -245,7 +245,9 @@ function renderCityArr() {
     $cityButton.text(cityArr[i]);
     $cityButton.attr("class", "btn city-button");
     $cityButton.attr("value", cityArr[i]);
-    $cityButtonEl.append($cityButton).append("<br>");
+    if (cityArr[i]) {
+      $cityButtonEl.append($cityButton).append("<br>");
+    }
   }
 
   localStorage.setItem("recent_searches", JSON.stringify(cityArr));
