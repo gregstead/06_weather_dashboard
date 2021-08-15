@@ -5,7 +5,8 @@
   --clr-neutral: #efefef;
   --clr-grey-100: hsl(0, 1.3%, 89.8%);
   --clr-grey-400: hsl(0, 1.3%, 29.8%);
-  --clr-watermelon: #ff3b3f;
+  --clr-watermelon: hsl(358.8, 100%, 61.6%);
+  --clr-watermelon-light: hsl(358.8, 100%, 81.6%);
   --clr-sky: hsl(190.5, 60.6%, 87.1%);
   --clr-sky-white: hsl(190.5, 60.6%, 95.1%);
 }
@@ -100,6 +101,16 @@ button {
   border: solid 0.17em var(--clr-watermelon);
   background-color: transparent;
   border-radius: 4px;
+  transition: all 250ms ease-in-out;
+}
+
+button:hover {
+  background-color: var(--clr-watermelon);
+  color: var(--clr-white);
+}
+
+button:focus {
+  background-color: var(--clr-watermelon-light);
 }
 
 header {
@@ -114,6 +125,10 @@ header {
 header > h1 {
   margin-left: 5vw;
   z-index: 1;
+}
+
+header > p {
+  padding-top: 0.2em;
 }
 
 input {
